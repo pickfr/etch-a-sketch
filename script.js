@@ -2,53 +2,41 @@
 // Start with a blank pixel grid of 16x16
 // get cursor position and when clicked if the mouse hovers over a section colour that section in.
 
-// Update to new Array(len).fill(0) when done
-    const pixelArray = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-                        [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]];
 
+    let canvasSize = 16;
+    let pixelListener;
+    let mouseDown = false;
 
-                        let pixelListener;
-    
 
 // create 16x16 divs that the array will map to.
 buildPixelDivs();
-
+window.addEventListener("mousedown", (e) => {mouseDown = true; alterPixel(e)});
+window.addEventListener("mouseup", (e) => {mouseDown = false; alterPixel(e)});
 
 function buildPixelDivs(){
 
+
+    askUserForSettings();
+
     const containerDiv = document.getElementById("etch-a-sketch-container");
 
-    for (let y = 0; y < pixelArray.length; y++) {
 
-        let pixelDivRow = document.createElement(`div`);
-        pixelDivRow.classList.add(`row`);
-        pixelDivRow.classList.add(`row-${y}`);
-        containerDiv.appendChild(pixelDivRow)
+    //Loop through the arrays in the pixelArray array to make the divs for the rows
+    for (let y = 0; y < canvasSize; y++) {
 
 
+        let pixelRow = document.createElement(`div`);
+        pixelRow.classList.add(`row`);
+        containerDiv.appendChild(pixelRow);
 
-        for (let x = 0; x < pixelArray[y].length; x++) {
-        
-            pixelArray[y][x] = document.createElement(`div`);
-            pixelArray[y][x].classList.add(`y${y}x${x}`);
-            pixelArray[y][x].classList.add(`pixel`);
-            pixelDivRow.appendChild(pixelArray[y][x]);
-            pixelArray[y][x].textContent = `[x]`;
-            pixelArray[y][x].addEventListener("mouseover",alterPixel);
+        // Loop through each pixelArray's array (we're 2 deep)
+        for (let x = 0; x < canvasSize; x++) {
+
+            let pixel = document.createElement(`div`);
+            pixel.classList.add(`pixel`);
+            pixelRow.appendChild(pixel);
+            pixel.addEventListener("mouseover",alterPixel);
+            pixel.addEventListener("mousedown", alterPixel);
         }
     }
 }
@@ -56,23 +44,17 @@ function buildPixelDivs(){
 
 
 function alterPixel(e){
-
-
-    console.log(e.target);
-    e.target.textContent = `[o]`;
+    
+if(mouseDown && e.target.classList.contains("pixel")){
+    
+    e.target.style = `background-color: rgb(0, 0, 0)`
+}
 
 
 }
 
 
+function askUserForSettings(){
 
 
-
-// Use this to make a 16 x 16 group of divs probs with a loop
-//const pixels = document.createElement(`div`);
-
-
-//pixels.classList.add("pixels")
-// Put the pixels inside the container div.
-//containerDiv.appendChild(pixels)
-
+}
