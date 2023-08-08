@@ -104,6 +104,7 @@ function alterPixel(e){
 if(mouseDown && e.target.classList.contains("pixel")){
     
     e.target.style.backgroundColor = brushType;
+    chooseRGBMode();
 }
 
 
