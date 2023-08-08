@@ -1,12 +1,13 @@
 
-// Start with a blank pixel grid of 16x16
-// get cursor position and when clicked if the mouse hovers over a section colour that section in.
+// App Properties
 
     let canvasSize = 8;
     let canvasSquared;
     let mouseDown = false;
     let hueValueRainbow = 0;
     let brushType = rgbRainbowMode();
+
+// Stored Divs/Buttons/Other element/nodes.
 
     const resetButton = document.getElementById("reset");
     const containerDiv = document.getElementById("etch-a-sketch-container");
@@ -21,7 +22,7 @@ window.addEventListener("mouseup", (e) => {mouseDown = false; alterPixel(e)});
 resetButton.addEventListener("mousedown", resetCanvas);
 pixelSlider.oninput = displaySliderValues;
 
-
+// TODO: This doesn't really do anything. Was planning to go through chain and see where I could refactor the ui updates.
 function refreshUI(){
 
     buildPixelDivs();
@@ -29,16 +30,17 @@ function refreshUI(){
 
 }
 
+// Creates the blank canvas ready to paint on.
 function buildPixelDivs(){
 
-
+// TODO: rename function - decided to move in a different direction and use a slider instead of a prompt box
     askUserForSettings();
 
 
 
 
 
-        // Loop through each pixelArray's array (we're 2 deep)
+        // Generate each pixel for the canvas and add events
         for (let x = 0; x < canvasSquared; x++) {
 
             let pixel = document.createElement(`div`);
@@ -51,6 +53,8 @@ function buildPixelDivs(){
     }
 
 
+    // Update this to choose functions automatically if possible.
+    // This selects the function to use from the dropdown selection in the ui
 function chooseRGBMode(){
 
     console.log(rgbSelectorNode.value);
@@ -72,10 +76,11 @@ function chooseRGBMode(){
 
 }
 
+
+// Brush modes
 function rgbRandomiseMode(){
 
     let h = Math.ceil((Math.random()*360));
-    console.log(`hsl(${h},85,75)`)
     return `hsl(${h},85%,75%)`;
 }
 
@@ -92,14 +97,13 @@ function rgbSolidMode(){
     return `rgb(255,255,255)`
 
 }
-
+// End of brush modes
 
 function alterPixel(e){
     
 if(mouseDown && e.target.classList.contains("pixel")){
     
     e.target.style.backgroundColor = brushType;
-    chooseRGBMode();
 }
 
 
@@ -107,13 +111,13 @@ if(mouseDown && e.target.classList.contains("pixel")){
 
 
 function askUserForSettings(){
- 
-//Take the user input as one side of the canvas and work out the amount of pixels    
+
 canvasSquared = canvasSize * canvasSize;
     
 
 }
 
+// Removes all the pixel divs and runs buildPixelDivs to recreate them.
 function resetCanvas(){
 
     let pixels = document.getElementsByClassName("pixel");
@@ -127,6 +131,9 @@ function resetCanvas(){
 
 }
 
+
+// Adds a label to sliders so user can see value. 
+// TODO: Update slider value on page load, instead of after user interaction. See TODO: update refresh UI at start of this JS file.
 function displaySliderValues(){
 
     let resolutionDisplay = document.getElementById("resolution-display");
