@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-     <script src="script.js" defer></script> 
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="script.js" defer></script>
     <title>Etch-A-Sketch</title>
 </head>
+
 <body>
 
-    <div id="etch-a-sketch-container">
+    <div class="section">
+        <div class="parameters">
+            <button type="button" value="Reset" id="reset">Reset</button>
+            <div class="parameter">
+            <h4>Resolution</h4>
+            <input type="range" min="4" max="32" value="16" class="slider" id="pixel-slider">
+            <h4>Colour Modes</h4>
+            <select name="color-modes" id="color-mode-selector">
+                <option value="Rainbow">Rainbow</option>
+                <option value="Random">Random</option>
+                <option value="Solid">Solid</option>
+            </select>
+            <p class="parameter-value" id="resolution-display"></p>
+            </div>
+        </div>
 
+        <div id="etch-a-sketch-container">
+
+        </div>
     </div>
 
 </body>
+
 </html>
