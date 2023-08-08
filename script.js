@@ -57,7 +57,6 @@ function buildPixelDivs(){
     // This selects the function to use from the dropdown selection in the ui
 function chooseRGBMode(){
 
-    console.log(rgbSelectorNode.value);
 
     switch (rgbSelectorNode.value) {
         case "Rainbow":
